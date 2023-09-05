@@ -3,14 +3,26 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { MyInterceptor } from './Interceptor/Interceptor';
+import { CurrencyComponent } from './currency/currency.component';
+
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
+    CurrencyComponent,
+    
+   
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:MyInterceptor,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
